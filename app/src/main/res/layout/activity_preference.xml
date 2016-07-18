@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    >
+
+    <RelativeLayout
+        android:id="@+id/placeHolder1"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_centerHorizontal="true"/>
+
+    <RelativeLayout
+        android:id="@+id/placeHolder2"
+        android:layout_width="0dp"
+        android:layout_height="10dp"
+        android:layout_centerVertical="true"/>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/placeHolder2"
+        android:layout_toLeftOf="@+id/placeHolder1"
+        android:layout_toStartOf="@+id/placeHolder1"
+        android:id="@+id/radioGroup4"
+        android:layout_below="@+id/placeHolder1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Level"
+            android:id="@+id/textView"
+            android:layout_gravity="center_horizontal" />
+
+        <CheckBox
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Level 1"
+            android:id="@+id/CheckBox1"
+            android:checked="false"
+            android:layout_gravity="center_horizontal" />
+
+        <CheckBox
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Level 2"
+            android:id="@+id/CheckBox2"
+            android:layout_gravity="center_horizontal"
+            android:checked="false" />
+
+        <CheckBox
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Level 3"
+            android:id="@+id/CheckBox3"
+            android:checked="false"
+            android:layout_gravity="center_horizontal" />
+    </RadioGroup>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignTop="@+id/radioGroup4"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/radioGroup4"
+        android:id="@+id/radioGroup5"
+        android:layout_alignBottom="@+id/radioGroup4"
+        android:layout_toRightOf="@+id/radioGroup4">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Assessment type"
+            android:id="@+id/textView2"
+            android:layout_gravity="center_horizontal" />
+
+        <CheckBox
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Coursework only"
+            android:id="@+id/CheckBox4"
+            android:checked="false" />
+
+        <CheckBox
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Exam only"
+            android:id="@+id/CheckBox5"
+            android:checked="false" />
+
+        <CheckBox
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hybrid"
+            android:id="@+id/CheckBox6"
+            android:checked="false" />
+
+    </RadioGroup>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignRight="@+id/placeHolder1"
+        android:layout_alignEnd="@+id/placeHolder1"
+        android:id="@+id/radioGroup6"
+        android:layout_below="@+id/placeHolder2">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Credit"
+            android:id="@+id/textView3"
+            android:layout_gravity="center_horizontal" />
+
+        <CheckBox
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="          10"
+            android:id="@+id/CheckBox7"
+            android:checked="false"
+            android:layout_gravity="center_horizontal" />
+
+        <CheckBox
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="          15"
+            android:id="@+id/CheckBox8"
+            android:checked="false"
+            android:layout_gravity="center_horizontal" />
+
+        <CheckBox
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="          20"
+            android:id="@+id/CheckBox9"
+            android:checked="false"
+            android:layout_gravity="center_horizontal" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" Back"
+            android:id="@+id/PreBackBt" />
+
+
+    </RadioGroup>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignTop="@+id/radioGroup6"
+        android:layout_toRightOf="@+id/radioGroup4"
+        android:layout_toEndOf="@+id/radioGroup4"
+        android:id="@+id/radioGroup7">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Semester"
+            android:id="@+id/textView4"
+            android:layout_gravity="center_horizontal" />
+
+        <CheckBox
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="The first semester"
+            android:id="@+id/CheckBox10"
+            android:checked="false" />
+
+        <CheckBox
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="The second semester"
+            android:id="@+id/CheckBox11"
+            android:checked="false" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:id="@+id/PreSbBt"
+            android:layout_gravity="end" />
+
+    </RadioGroup>
+
+
+</RelativeLayout>
