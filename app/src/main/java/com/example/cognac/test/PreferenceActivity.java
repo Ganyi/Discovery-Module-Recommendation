@@ -7,11 +7,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 
+import java.util.ArrayList;
+
 public class PreferenceActivity extends AppCompatActivity {
     private Button bt;
     private Button bt2;
-    private CheckBox checkBox1,checkBox2,checkBox3,checkBox4,checkBox5,checkBox6,checkBox7;
-    private CheckBox checkBox8,checkBox9,checkBox10,checkBox11;
+    private CheckBox level1, level2, level3, courseworkonly, examonly, hybrid, c10;
+    private CheckBox c15, c30, s1, s2;
+    private ArrayList<CheckBox> preference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,7 +25,7 @@ public class PreferenceActivity extends AppCompatActivity {
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(PreferenceActivity.this,LoginActivity.class);
+                Intent intent = new Intent(PreferenceActivity.this, StuMainActivity.class);
                 startActivity(intent);
             }
         });
@@ -30,57 +34,72 @@ public class PreferenceActivity extends AppCompatActivity {
         bt2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(PreferenceActivity.this,StuMain.class);
+                Intent intent = new Intent(PreferenceActivity.this, StuMainActivity.class);
                 startActivity(intent);
             }
         });
 
 
-        checkBox1 = (CheckBox)findViewById(R.id.CheckBox1);
-        checkBox2 = (CheckBox)findViewById(R.id.CheckBox2);
-        checkBox3 = (CheckBox)findViewById(R.id.CheckBox3);
-        checkBox4 = (CheckBox)findViewById(R.id.CheckBox4);
-        checkBox5 = (CheckBox)findViewById(R.id.CheckBox5);
-        checkBox6 = (CheckBox)findViewById(R.id.CheckBox6);
-        checkBox7 = (CheckBox)findViewById(R.id.CheckBox7);
-        checkBox8 = (CheckBox)findViewById(R.id.CheckBox8);
-        checkBox9 = (CheckBox)findViewById(R.id.CheckBox9);
-        checkBox10 = (CheckBox)findViewById(R.id.CheckBox10);
-        checkBox11 = (CheckBox)findViewById(R.id.CheckBox11);
+        level1 = (CheckBox) findViewById(R.id.Level1);
+        level2 = (CheckBox) findViewById(R.id.Level2);
+        level3 = (CheckBox) findViewById(R.id.Level3);
+        courseworkonly = (CheckBox) findViewById(R.id.Courseworkonly);
+        examonly = (CheckBox) findViewById(R.id.Examonly);
+        hybrid = (CheckBox) findViewById(R.id.Hybrid);
+        c10 = (CheckBox) findViewById(R.id.c10);
+        c15 = (CheckBox) findViewById(R.id.c15);
+        c30 = (CheckBox) findViewById(R.id.c20);
+        s1 = (CheckBox) findViewById(R.id.s1);
+        s2 = (CheckBox) findViewById(R.id.s2);
 
-        if (checkBox1.isChecked()) {
-            String Level1 = "Level1";
+
+        preference = new ArrayList<>();
+        if (level1.isChecked()) {
+            preference.add(level1);
         }
-        if (checkBox2.isChecked()) {
-            String Level2 = "Level2";
+        if (level2.isChecked()) {
+            preference.add(level2);
         }
-        if (checkBox3.isChecked()) {
-            String Level3 = "Level3";
+        if (level3.isChecked()) {
+            preference.add(level3);
         }
-        if (checkBox4.isChecked()) {
-            String Coursework_only = "Coursework_only";
+        if (courseworkonly.isChecked()) {
+            preference.add(courseworkonly);
         }
-        if (checkBox5.isChecked()) {
-            String Exam_only = "Exam_only";
+        if (examonly.isChecked()) {
+            preference.add(examonly);
         }
-        if (checkBox6.isChecked()) {
-            String Hybrid = "Hybrid";
+        if (hybrid.isChecked()) {
+            preference.add(hybrid);
         }
-        if (checkBox7.isChecked()) {
-            String Credit10 = "Credit10";
+        if (c10.isChecked()) {
+            preference.add(c10);
         }
-        if (checkBox8.isChecked()) {
-            String Credit15 = "Credit15";
+        if (c15.isChecked()) {
+            preference.add(c15);
         }
-        if (checkBox9.isChecked()) {
-            String Credit30 = "Credit30";
+        if (c30.isChecked()) {
+            preference.add(c30);
         }
-        if (checkBox10.isChecked()) {
-            String Semester1 = "Semester1";
+        if (s1.isChecked()) {
+            preference.add(s1);
         }
-        if (checkBox11.isChecked()) {
-            String Semester2 = "Semester2";
+        if (s2.isChecked()) {
+            preference.add(s2);
         }
 
+    }
+
+    public void prefSubmit(View view) {
+        if (view.getId() == R.id.PreSbBt) {
+            ArrayList<String> preferenceStrings = new ArrayList<>();
+            for(int i = 0; i < preference.size(); i++){
+                preferenceStrings.add(preference.get(i).getText().toString());
+            }
+            Intent intent=new Intent();
+            intent.setClass(PreferenceActivity.this, RecommendActivity.class);
+            intent.putExtra("pre", preferenceStrings);
+            startActivity(intent);
+        }
     }
 }

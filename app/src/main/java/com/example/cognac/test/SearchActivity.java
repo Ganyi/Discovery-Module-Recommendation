@@ -14,7 +14,6 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
         init();
     }
-
     private void init(){
         webView = (WebView) findViewById(R.id.webView);
         //WebView加载web资源

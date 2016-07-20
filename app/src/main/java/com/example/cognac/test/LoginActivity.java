@@ -51,7 +51,7 @@ public class LoginActivity extends AppCompatActivity implements RadioGroup.OnChe
             if (passwordstr.equals(password)){
                 if (Usertypestr.equals(Usertype)) {
 
-                    Intent i = new Intent(LoginActivity.this, PreferenceActivity.class);
+                    Intent i = new Intent(LoginActivity.this, StuMainActivity.class);
                     startActivity(i);
                 }
                 else{

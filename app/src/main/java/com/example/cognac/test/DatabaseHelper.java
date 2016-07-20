@@ -12,8 +12,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "Users.db";
-    private static final String COLUMN_ID = "id";
+    private static final String DATABASE_NAME = "Project.db";
     private static final String TABLE_NAME = "Users";
     private static final String COLUMN_EMAIL = "Email";
     private static final String COLUMN_PASSWORD = "Password";
@@ -108,6 +107,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }return b;
 
     }
+
+    public String searchModule(String PrefAndHobbiesString){
+        db = this.getReadableDatabase();
+        String query = "select " + PrefAndHobbiesString + " from " + "Modules";
+        Cursor cursor = db.rawQuery(query,null);
+        String a,b;
+
+
+
+    }
+
+
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
         String query = "DROP TABLE IF EXISTS " + TABLE_NAME;

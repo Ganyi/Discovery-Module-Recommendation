@@ -1,5 +1,6 @@
 package com.example.cognac.test;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
@@ -21,6 +22,13 @@ public class RecommendActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recommend);
 
+        //Get preference from last activity
+        Intent intent=getIntent();
+        Bundle bundle=intent.getExtras();
+        ArrayList pre = bundle.getStringArrayList("pre");
+
+
+
         listView = (ListView)findViewById(R.id.moduleScroll);
         //ArrayAdapter(上下文,当前listview加载的每一个列表项所对应的布局文件,数据源)
         //适配器加载数据源
@@ -40,13 +48,12 @@ public class RecommendActivity extends AppCompatActivity {
         //listView.setAdapter(arrayAdapter);
         listView.setAdapter(simpleAdapter);
     }
-
     private List<Map<String,Object>> getData(){
         for (int i=1;i<20;i++){
 
             Map<String,Object> map = new HashMap<String, Object>();
             map.put("pic",R.drawable.ic_local_movies_black_48dp);
-            map.put("txt","陈秋霞"+i);
+            map.put("txt","张学友"+i);
             dataList.add(map);
 
         }
@@ -54,7 +61,8 @@ public class RecommendActivity extends AppCompatActivity {
         return dataList;
     }
 
-    private void onClickRe(){
+    private void onClickRecommed(){
+
 
 
     }
