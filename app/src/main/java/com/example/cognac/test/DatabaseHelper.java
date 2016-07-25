@@ -14,6 +14,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "Project.db";
     private static final String TABLE_NAME = "Users";
+    private static final String TABLE_NAMETWO = "Modules";
     private static final String COLUMN_EMAIL = "Email";
     private static final String COLUMN_PASSWORD = "Password";
     private static final String COLUMN_USERTYPE = "Usertype";
@@ -108,15 +109,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public String searchModule(String PrefAndHobbiesString){
+
+    /*public String searchModule(String PrefAndHobbiesString) {
         db = this.getReadableDatabase();
-        String query = "select " + PrefAndHobbiesString + " from " + "Modules";
-        Cursor cursor = db.rawQuery(query,null);
-        String a,b;
 
+        String query1 = "select distinct Name from Modules where Level in("+PrefAndHobbiesString+");";
+        Cursor cursor = db.query(TABLE_NAMETWO, null, "PrefAndHobbiesString", null, null, null, null);
 
+        if (cursor != null) {
+            String[] colums = cursor.getColumnNames();
+            while (cursor.moveToNext()) {
 
+                for (String ModuleName : colums) {
+
+                    return cursor.getString(cursor.getColumnIndex(ModuleName));
+                }
+            }
+
+        }
     }
+*/
 
 
     @Override

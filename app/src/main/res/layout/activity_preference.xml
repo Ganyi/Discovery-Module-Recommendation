@@ -37,28 +37,28 @@
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Level 1"
-            android:id="@+id/CheckBox1"
+            android:text="Level1"
+            android:id="@+id/Level1"
             android:checked="false"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="left|center_horizontal|right" />
 
         <CheckBox
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Level 2"
-            android:id="@+id/CheckBox2"
-            android:layout_gravity="center_horizontal"
+            android:text="Level2"
+            android:id="@+id/Level2"
+            android:layout_gravity="left|center_horizontal"
             android:checked="false" />
 
         <CheckBox
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Level 3"
-            android:id="@+id/CheckBox3"
+            android:text="Level3"
+            android:id="@+id/Level3"
             android:checked="false"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="left|center_horizontal" />
     </RadioGroup>
 
     <RadioGroup
@@ -84,7 +84,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Coursework only"
-            android:id="@+id/CheckBox4"
+            android:id="@+id/Courseworkonly"
             android:checked="false" />
 
         <CheckBox
@@ -92,7 +92,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Exam only"
-            android:id="@+id/CheckBox5"
+            android:id="@+id/Examonly"
             android:checked="false" />
 
         <CheckBox
@@ -100,7 +100,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Hybrid"
-            android:id="@+id/CheckBox6"
+            android:id="@+id/Hybrid"
             android:checked="false" />
 
     </RadioGroup>
@@ -124,28 +124,28 @@
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="          10"
-            android:id="@+id/CheckBox7"
+            android:text="10"
+            android:id="@+id/c10"
             android:checked="false"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="left|center_horizontal" />
 
         <CheckBox
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="          15"
-            android:id="@+id/CheckBox8"
+            android:text="15"
+            android:id="@+id/c15"
             android:checked="false"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="left|center_horizontal" />
 
         <CheckBox
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="          20"
-            android:id="@+id/CheckBox9"
+            android:text="20"
+            android:id="@+id/c20"
             android:checked="false"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="left|center_horizontal" />
 
         <Button
             android:layout_width="wrap_content"
@@ -175,21 +175,22 @@
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="The first semester"
-            android:id="@+id/CheckBox10"
+            android:text="Semester1"
+            android:id="@+id/s1"
             android:checked="false" />
 
         <CheckBox
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="The second semester"
-            android:id="@+id/CheckBox11"
+            android:text="Semester2"
+            android:id="@+id/s2"
             android:checked="false" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="prefSubmit"
             android:text="Submit"
             android:id="@+id/PreSbBt"
             android:layout_gravity="end" />

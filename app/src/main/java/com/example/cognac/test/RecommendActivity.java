@@ -3,6 +3,7 @@ package com.example.cognac.test;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -24,10 +25,23 @@ public class RecommendActivity extends AppCompatActivity {
 
         //Get preference from last activity
         Intent intent=getIntent();
-        Bundle bundle=intent.getExtras();
-        ArrayList pre = bundle.getStringArrayList("pre");
 
+        String [] Level = intent.getStringArrayExtra("level");
+        String [] AssessmentType = intent.getStringArrayExtra("AssessmentType");
+        String [] Credits = intent.getStringArrayExtra("Credits");
+        String [] Semester = intent.getStringArrayExtra("Semester");
 
+        String msg = "";
+        for (int i = 0;i < AssessmentType.length;i++){
+
+            String as = String.valueOf(AssessmentType[i]);
+            msg = msg + "\'"+as+"\'"+",";
+
+        }
+
+        String a = msg.substring(0,msg.length()-1);
+
+        Log.i("info",a);
 
         listView = (ListView)findViewById(R.id.moduleScroll);
         //ArrayAdapter(上下文,当前listview加载的每一个列表项所对应的布局文件,数据源)
@@ -62,6 +76,8 @@ public class RecommendActivity extends AppCompatActivity {
     }
 
     private void onClickRecommed(){
+
+
 
 
 
