@@ -16,7 +16,7 @@ public class StuMainActivity extends AppCompatActivity {
 
     public void onReClcik(View view){
         if(view.getId() == R.id.moduleRecommendations){
-            Intent i = new Intent(StuMainActivity.this, RecommendActivity.class);
+            Intent i = new Intent(StuMainActivity.this, PreferenceActivity.class);
             startActivity(i);
         }
 

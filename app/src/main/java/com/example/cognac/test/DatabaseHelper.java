@@ -5,6 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
+import java.util.ArrayList;
 
 /**
  * Created by Cognac on 16/7/6.
@@ -20,7 +23,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_USERTYPE = "Usertype";
     SQLiteDatabase db;
 
-    private static final String TABLE_CREATE = "create table Users (id integer primary key not null , Password  text not null , Email text not null, Usertype text not null );";
+    private static final String TABLE_CREATE = "create table Users (id integer primary key " +
+            "not null , Password  text not null , Email text not null, Usertype text not null );";
 
 
 
@@ -109,33 +113,35 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    public ArrayList<String> searchModule(String Level,String AssessmentType,String Credit,
+                                          String Semester) {
 
-    /*public String searchModule(String PrefAndHobbiesString) {
         db = this.getReadableDatabase();
 
-        String query1 = "select distinct Name from Modules where Level in("+PrefAndHobbiesString+");";
-        Cursor cursor = db.query(TABLE_NAMETWO, null, "PrefAndHobbiesString", null, null, null, null);
+        String query = "select distinct Name from Modules where" + " \"Level\""
+                + " in("+Level+") and \"Assessment Type\" in("+AssessmentType+") " +
+                "and \"Credit\" in("+Credit+") and \"Semester\" in("+Semester+")";
+        Log.i("info3",query);
+        Cursor cursor = db.rawQuery(query,null);
+        String a;
+        ArrayList<String> b = new ArrayList<>();
 
-        if (cursor != null) {
-            String[] colums = cursor.getColumnNames();
-            while (cursor.moveToNext()) {
+        if (cursor.moveToFirst()) {
 
-                for (String ModuleName : colums) {
-
-                    return cursor.getString(cursor.getColumnIndex(ModuleName));
-                }
+            do {
+                a = cursor.getString(0);
+                b.add(a);
             }
+            while (cursor.moveToNext());
+
+            }return b;
 
         }
-    }
-*/
-
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
         String query = "DROP TABLE IF EXISTS " + TABLE_NAME;
         db.execSQL(query);
         this.onCreate(db);
-
     }
 }

@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -98,41 +99,49 @@ public class PreferenceActivity extends AppCompatActivity {
                 Semester.add(s2);
             }
 
-            String[] preferenceStrings = new String[preference.size()];
-            for(int i = 0; i < preference.size(); i++){
-                preferenceStrings[i] = preference.get(i).getText().toString();
+
+            if (Level.size()==0 ||AssessmentType.size()==0 ||Credits.size()==0|| Semester.size()==0)
+            {
+                Toast p = Toast.makeText(PreferenceActivity.this, "For every gy please select at least one item", Toast.LENGTH_SHORT);
+                p.show();
+
             }
+            else {
 
-            String[] LevelStrings = new String[Level.size()];
-            for(int i = 0; i < Level.size(); i++){
-                LevelStrings[i] = Level.get(i).getText().toString();
+
+                String[] preferenceStrings = new String[preference.size()];
+                for (int i = 0; i < preference.size(); i++) {
+                    preferenceStrings[i] = preference.get(i).getText().toString();
+                }
+
+                String[] LevelStrings = new String[Level.size()];
+                for (int i = 0; i < Level.size(); i++) {
+                    LevelStrings[i] = Level.get(i).getText().toString();
+                }
+
+                String[] AssessmentTypeStrings = new String[AssessmentType.size()];
+                for (int i = 0; i < AssessmentType.size(); i++) {
+                    AssessmentTypeStrings[i] = AssessmentType.get(i).getText().toString();
+                }
+
+                String[] CreditsStrings = new String[Credits.size()];
+                for (int i = 0; i < Credits.size(); i++) {
+                    CreditsStrings[i] = Credits.get(i).getText().toString();
+                }
+
+                String[] SemesterStrings = new String[Semester.size()];
+                for (int i = 0; i < Semester.size(); i++) {
+                    SemesterStrings[i] = Semester.get(i).getText().toString();
+                }
+                Intent intent = new Intent();
+                intent.setClass(PreferenceActivity.this, RecommendActivity.class);
+                intent.putExtra("level", LevelStrings);
+                intent.putExtra("AssessmentType", AssessmentTypeStrings);
+                intent.putExtra("Credits", CreditsStrings);
+                intent.putExtra("Semester", SemesterStrings);
+
+                startActivity(intent);
             }
-
-            String[] AssessmentTypeStrings = new String[AssessmentType.size()];
-            for(int i = 0; i < AssessmentType.size(); i++){
-                AssessmentTypeStrings[i] = AssessmentType.get(i).getText().toString();
-            }
-
-            String[] CreditsStrings = new String[Credits.size()];
-            for(int i = 0; i < Credits.size(); i++){
-                CreditsStrings[i] = Credits.get(i).getText().toString();
-            }
-
-            String[] SemesterStrings = new String[Semester.size()];
-            for(int i = 0; i < Semester.size(); i++){
-                SemesterStrings[i] = Semester.get(i).getText().toString();
-            }
-
-
-
-            Intent intent=new Intent();
-            intent.setClass(PreferenceActivity.this, RecommendActivity.class);
-            intent.putExtra("level", LevelStrings);
-            intent.putExtra("AssessmentType", AssessmentTypeStrings);
-            intent.putExtra("Credits", CreditsStrings);
-            intent.putExtra("Semester", SemesterStrings);
-
-            startActivity(intent);
         }
     }
 }
