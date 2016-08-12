@@ -27,7 +27,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             "not null , Password  text not null , Email text not null, Usertype text not null );";
 
 
-
     public DatabaseHelper(Context context){
         super(context, DATABASE_NAME,null,DATABASE_VERSION);
     }
@@ -47,7 +46,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         db.insert(TABLE_NAME, null, values);
         db.close();
-
     }
 
     public String searchPass (String Email){
@@ -67,7 +65,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 }
             }
             while (cursor.moveToNext());
-
         }return b;
     }
     public String searchUT (String Email){
@@ -87,7 +84,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 }
             }
             while (cursor.moveToNext());
-
         }return b;
     }
 
@@ -108,24 +104,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 }
             }
             while (cursor.moveToNext());
-
         }return b;
-
     }
 
     public ArrayList<String> searchModule(String Level,String AssessmentType,String Credit,
-                                          String Semester) {
+                                          String Semester,String Interests) {
 
         db = this.getReadableDatabase();
 
         String query = "select distinct Name from Modules where" + " \"Level\""
                 + " in("+Level+") and \"Assessment Type\" in("+AssessmentType+") " +
-                "and \"Credit\" in("+Credit+") and \"Semester\" in("+Semester+")";
-        Log.i("info3",query);
+                "and \"Credit\" in("+Credit+") and \"Semester\" in("+Semester+") and " + Interests+";";
+
+        Log.i("MESSAGE",query);
         Cursor cursor = db.rawQuery(query,null);
         String a;
         ArrayList<String> b = new ArrayList<>();
-
         if (cursor.moveToFirst()) {
 
             do {
@@ -135,7 +129,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             while (cursor.moveToNext());
 
             }return b;
-
         }
 
     @Override

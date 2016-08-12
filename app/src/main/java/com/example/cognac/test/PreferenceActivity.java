@@ -12,11 +12,9 @@ import java.util.ArrayList;
 
 public class PreferenceActivity extends AppCompatActivity {
     private Button bt;
-    private Button bt2;
     private CheckBox level1, level2, level3, courseworkonly, examonly, hybrid, c10;
     private CheckBox c15, c30, s1, s2;
     private ArrayList<CheckBox> preference;
-
     private ArrayList<CheckBox> Level;
     private ArrayList<CheckBox> AssessmentType;
     private ArrayList<CheckBox> Credits;
@@ -63,8 +61,6 @@ public class PreferenceActivity extends AppCompatActivity {
             Credits = new ArrayList<>();
             Semester = new ArrayList<>();
 
-
-
             if (level1.isChecked()) {
                 Level.add(level1);
             }
@@ -102,7 +98,8 @@ public class PreferenceActivity extends AppCompatActivity {
 
             if (Level.size()==0 ||AssessmentType.size()==0 ||Credits.size()==0|| Semester.size()==0)
             {
-                Toast p = Toast.makeText(PreferenceActivity.this, "For every gy please select at least one item", Toast.LENGTH_SHORT);
+                Toast p = Toast.makeText(PreferenceActivity.this, "For every menu please select at " +
+                        "least one item", Toast.LENGTH_SHORT);
                 p.show();
 
             }

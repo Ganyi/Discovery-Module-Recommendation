@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Test</string>
-    <string name="text_view_name">Discovery Modules Recommendation</string>
+    <string name="text_view_name">Discovery Modules Exploration</string>
     <string name="title_activity_login">Discovery Modules Recommendation</string>
 
     <!-- Strings related to login -->

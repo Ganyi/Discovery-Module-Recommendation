@@ -24,7 +24,7 @@
         android:layout_toLeftOf="@+id/placeHolder1"
         android:layout_toStartOf="@+id/placeHolder1"
         android:id="@+id/radioGroup4"
-        android:layout_below="@+id/placeHolder1">
+        android:layout_below="@+id/textView11">
 
         <TextView
             android:layout_width="wrap_content"
@@ -196,6 +196,15 @@
             android:layout_gravity="end" />
 
     </RadioGroup>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Plese select your preferences"
+        android:id="@+id/textView11"
+        android:textSize="20sp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>
