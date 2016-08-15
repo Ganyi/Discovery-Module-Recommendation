@@ -12,6 +12,7 @@ import android.widget.Toast;
 public class LoginActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
     private RadioGroup rg;
     String Usertype;
+    public static String Username;
     DatabaseHelper helper = new DatabaseHelper(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,7 @@ public class LoginActivity extends AppCompatActivity implements RadioGroup.OnChe
 
             EditText email = (EditText) findViewById(R.id.email);
             String emailstr = email.getText().toString();
+
             EditText pass = (EditText) findViewById(R.id.password);
             String passwordstr = pass.getText().toString();
 
@@ -50,7 +52,7 @@ public class LoginActivity extends AppCompatActivity implements RadioGroup.OnChe
 
             if (passwordstr.equals(password)){
                 if (Usertypestr.equals(Usertype)) {
-
+                    Username = emailstr;
                     Intent i = new Intent(LoginActivity.this, StuMainActivity.class);
                     startActivity(i);
                 }
@@ -66,6 +68,7 @@ public class LoginActivity extends AppCompatActivity implements RadioGroup.OnChe
         }
 
         if (view.getId() == R.id.Register){
+
             Intent i = new Intent(LoginActivity.this,RegisterActivity.class);
             startActivity(i);
         }

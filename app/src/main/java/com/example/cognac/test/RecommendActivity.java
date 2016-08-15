@@ -1,15 +1,21 @@
 package com.example.cognac.test;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -17,14 +23,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class RecommendActivity extends AppCompatActivity {
+public class RecommendActivity extends AppCompatActivity implements AdapterView.OnItemClickListener,AdapterView.OnItemLongClickListener{
     DatabaseHelper helper = new DatabaseHelper(this);
     private ListView listView;
     private ArrayAdapter<String> arrayAdapter;
     private SimpleAdapter simpleAdapter;
     private List<Map<String, Object>> dataList;
-    private ArrayList<String> result;
-    private ArrayList<String> test;
+    private ArrayList<String> data = new ArrayList<String>();
+
+    LoginActivity loginMsg = new LoginActivity();
+
+
+    private ArrayList<String> resultName;
+    private ArrayList<String> resultCode;
+    private ArrayList<String> resultLevel;
+    private ArrayList<String> resultSemester;
+
+    String Email;
+
 
 
     private CheckBox Easy;
@@ -43,12 +59,13 @@ public class RecommendActivity extends AppCompatActivity {
     private ArrayList<CheckBox> interests;
 
 
-    final ArrayList<CheckBox> checkBoxes = new ArrayList<>();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recommend);
+
+        Log.i("Namefsafsadf",loginMsg.Username);
+
 
 
         final ArrayList<CheckBox> checkBoxes = new ArrayList<>();
@@ -98,6 +115,7 @@ public class RecommendActivity extends AppCompatActivity {
                 }
             }
         });
+
     }
 
     public String FormatPre(String[] OriPre) {
@@ -109,7 +127,6 @@ public class RecommendActivity extends AppCompatActivity {
         String a = msg.substring(0, msg.length() - 1);
         return a;
     }
-
 
     public String FormatInterests(String[] OriIn) {
         String msg = "";
@@ -123,16 +140,6 @@ public class RecommendActivity extends AppCompatActivity {
     }
 
 
-    private List<Map<String, Object>> getData() {
-        for (int i = 0; i < result.size(); i++) {
-
-            Map<String, Object> map = new HashMap<String, Object>();
-            map.put("pic", R.mipmap.ic_launcher);
-            map.put("txt", result.get(i));
-            dataList.add(map);
-        }
-        return dataList;
-    }
 
     public void onClickRecommed(View view) {
         if (view.getId() == R.id.searchButton) {
@@ -188,13 +195,10 @@ public class RecommendActivity extends AppCompatActivity {
                 p.show();
 
             } else {
-
-
                 String[] InterestsString = new String[interests.size()];
                 for (int i = 0; i < interests.size(); i++) {
                     InterestsString[i] = interests.get(i).getText().toString();
                 }
-
 
                 String a = FormatInterests(InterestsString);
                 Log.i("a", a);
@@ -206,8 +210,17 @@ public class RecommendActivity extends AppCompatActivity {
                 String[] Credit = intent.getStringArrayExtra("Credits");
                 String[] Semester = intent.getStringArrayExtra("Semester");
 
-                result = helper.searchModule(FormatPre(Level), FormatPre(AssessmentType),
+                resultName = helper.searchModuleName(FormatPre(Level), FormatPre(AssessmentType),
                         FormatPre(Credit), FormatPre(Semester), FormatInterests(InterestsString));
+                resultCode = helper.searchModuleID(FormatPre(Level), FormatPre(AssessmentType),
+                        FormatPre(Credit), FormatPre(Semester), FormatInterests(InterestsString));
+
+                resultLevel= helper.searchModuleLevel(FormatPre(Level), FormatPre(AssessmentType),
+                        FormatPre(Credit), FormatPre(Semester), FormatInterests(InterestsString));
+                resultSemester= helper.searchModuleSemester(FormatPre(Level), FormatPre(AssessmentType),
+                        FormatPre(Credit), FormatPre(Semester), FormatInterests(InterestsString));
+
+
 
 
                 //ArrayAdapter(上下文,当前listview加载的每一个列表项所对应的布局文件,数据源)
@@ -221,11 +234,104 @@ public class RecommendActivity extends AppCompatActivity {
         4. From: Map中的键名
         5. to 绑定数据视图中的ID
         */
-                simpleAdapter = new SimpleAdapter(this, getData(), R.layout.item, new String[]{"pic", "txt"}, new int[]{R.id.pic, R.id.txt});
+
+                simpleAdapter = new SimpleAdapter(this, getData(), R.layout.newitem, new String[]{"txt","txtcode","txtlevel","txtsemester"}, new int[]{R.id.Name,R.id.Code,R.id.Level,R.id.Semester});
+                //simpleAdapter = new MyListAdapter(this, getData(), R.layout.newitem, new String[]{"txt","txtcode","txtlevel"}, new int[]{R.id.Name,R.id.Code,R.id.Level});
                 //使用视图(listview)加载适配器
-                //listView.setAdapter(arrayAdapter);
+                //
                 listView.setAdapter(simpleAdapter);
+
+                //listView.setAdapter(new MyListAdapter(this,R.layout.newitem,list));
+
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        Toast p = Toast.makeText(RecommendActivity.this, resultName.get(i), Toast.LENGTH_SHORT);
+                        p.show();
+
+                        helper.updateSelectedModules(resultCode.get(i),loginMsg.Username);
+                    }
+                });
+
             }
         }
     }
+        //Hash map
+    private List<Map<String, Object>> getData() {
+
+        for (int i = 0; i < resultName.size(); i++) {
+            Map<String, Object> map = new HashMap<String, Object>();
+            //map.put("pic", R.mipmap.ic_launcher);
+            map.put("txt", resultName.get(i));
+            map.put("txtcode", resultCode.get(i));
+            map.put("txtlevel", resultLevel.get(i));
+            map.put("txtsemester",resultSemester.get(i));
+
+            dataList.add(map);
+        }
+        return dataList;
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+    }
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+        return true;
+
+    }
+
+    private class MyListAdapter extends SimpleAdapter{
+        private int layout;
+
+        public MyListAdapter(Context context, List<? extends Map<String, ?>> data, int resource, String[] from, int[] to) {
+            super(context, data, resource, from, to);
+            layout = resource;
+        }
+
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            ViewHolder mainViewholder = null;
+
+            if (convertView == null){
+
+                LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
+                convertView = inflater.inflate(layout,parent,false);
+                ViewHolder viewHolder = new ViewHolder();
+                viewHolder.Code = (TextView) convertView.findViewById(R.id.Code);
+                viewHolder.Level = (TextView) convertView.findViewById(R.id.Level);
+                viewHolder.Name = (TextView) convertView.findViewById(R.id.Name);
+                //viewHolder.button = (Button) convertView.findViewById(R.id.ListButtonRec);
+
+                viewHolder.button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast p = Toast.makeText(RecommendActivity.this, "hello world", Toast.LENGTH_SHORT);
+                        p.show();
+                    }
+                });
+                convertView.setTag(viewHolder);
+            }
+            return convertView;
+        }
+    }
+
+public class ViewHolder{
+
+    TextView Code;
+    TextView Level;
+    TextView Name;
+    Button button;
+
 }
+
+
+
+    }
+
+
+
+

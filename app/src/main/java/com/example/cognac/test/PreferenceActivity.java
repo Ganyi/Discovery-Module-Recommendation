@@ -105,7 +105,6 @@ public class PreferenceActivity extends AppCompatActivity {
             }
             else {
 
-
                 String[] preferenceStrings = new String[preference.size()];
                 for (int i = 0; i < preference.size(); i++) {
                     preferenceStrings[i] = preference.get(i).getText().toString();

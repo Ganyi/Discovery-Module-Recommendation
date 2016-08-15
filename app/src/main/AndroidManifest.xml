@@ -24,7 +24,7 @@
         <activity android:name=".StuMainActivity" />
         <activity android:name=".RecommendActivity" />
         <activity android:name=".SearchActivity" />
-        <activity android:name=".testActivity"></activity>
+        <activity android:name=".SelectedActivity"></activity>
     </application>
 
 </manifest>

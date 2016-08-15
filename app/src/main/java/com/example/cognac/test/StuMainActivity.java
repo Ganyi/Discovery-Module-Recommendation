@@ -25,6 +25,12 @@ public class StuMainActivity extends AppCompatActivity {
             startActivity(i);
         }
 
+        if(view.getId() == R.id.SelectedModule){
+            Intent i = new Intent(StuMainActivity.this, SelectedActivity.class);
+            startActivity(i);
+        }
+
+
 
 
 

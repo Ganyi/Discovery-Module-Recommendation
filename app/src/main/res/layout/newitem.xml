@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:descendantFocusability="blocksDescendants">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/Level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorAccent"
+            android:textSize="15dp"
+            android:textIsSelectable="false"
+            android:text="12312331"
+            android:layout_alignBottom="@+id/linearLayout"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true" />
+
+
+        <TextView
+            android:id="@+id/Semester"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorAccent"
+            android:textSize="15dp"
+            android:textIsSelectable="false"
+            android:text="12312331"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <LinearLayout android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout">
+
+            <TextView android:id="@+id/Code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorAccent"
+                android:textSize="15dp"
+                android:textIsSelectable="false"
+                android:text="12312331" />
+            <TextView android:id="@+id/Name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="19dp"
+                android:text="123123" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>
