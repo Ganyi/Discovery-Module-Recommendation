@@ -1,8 +1,10 @@
 package com.example.cognac.test;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -40,8 +42,6 @@ public class RecommendActivity extends AppCompatActivity implements AdapterView.
     private ArrayList<String> resultSemester;
 
     String Email;
-
-
 
     private CheckBox Easy;
     private CheckBox AttractiveLecturer;
@@ -143,6 +143,36 @@ public class RecommendActivity extends AppCompatActivity implements AdapterView.
 
     public void onClickRecommed(View view) {
         if (view.getId() == R.id.searchButton) {
+
+
+
+            new AlertDialog.Builder(RecommendActivity.this).setTitle("Tip")//设置对话框标题
+
+                    .setMessage("Click a Module to select it！")//设置显示的内容
+
+                    .setPositiveButton("OK",new DialogInterface.OnClickListener() {//添加确定按钮
+
+                        @Override
+
+                        public void onClick(DialogInterface dialog, int which) {//确定按钮的响应事件
+
+                        }
+                    }
+
+                    ).setPositiveButton("OK",new DialogInterface.OnClickListener() {//添加返回按钮
+                @Override
+
+                public void onClick(DialogInterface dialog, int which) {//响应事件
+
+                    // TODO Auto-generated method stub
+
+                    Log.i("alertdialog"," 请保存数据！");
+
+                }
+
+            }).show();//在按键响应事件中显示此对话框
+
+
             listView = (ListView) findViewById(R.id.moduleScroll);
 
 
@@ -246,10 +276,24 @@ public class RecommendActivity extends AppCompatActivity implements AdapterView.
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        Toast p = Toast.makeText(RecommendActivity.this, resultName.get(i), Toast.LENGTH_SHORT);
-                        p.show();
 
-                        helper.updateSelectedModules(resultCode.get(i),loginMsg.Username);
+                        String Md = helper.searchSelectedModule(loginMsg.Username);
+                        boolean a = Md.contains(resultCode.get(i));
+
+                        if (a ==true){
+
+                            Toast p = Toast.makeText(RecommendActivity.this, "You have already selected this Module", Toast.LENGTH_SHORT);
+                            p.show();
+
+                        }
+                        else {
+
+                            Toast p = Toast.makeText(RecommendActivity.this, "You have already selected " + resultName.get(i), Toast.LENGTH_SHORT);
+                            p.show();
+
+
+                            helper.updateSelectedModules(resultCode.get(i), loginMsg.Username);
+                        }
                     }
                 });
 

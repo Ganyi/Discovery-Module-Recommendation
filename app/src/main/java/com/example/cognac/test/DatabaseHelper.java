@@ -52,7 +52,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void updateSelectedModules(String ModuleCode, String Username){
         db = this.getWritableDatabase();
 
-
         String ori = searchSelectedModule(Username);
 
         String update = "UPDATE Users SET SelectedModules = " + "\'" + ori + " " +  ModuleCode + "\'" + " WHERE Email = '" + Username + "\'";
@@ -60,8 +59,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Log.i("Update",update);
 
         db.execSQL(update);
-
     }
+
+    public void deleteSelectedModules(String ModuleCode){
+        db = this.getWritableDatabase();
+
+        String update = "UPDATE Users SET SelectedModules = replace (SelectedModules, '"+ ModuleCode + "\', \"\")";
+
+        Log.i("Update",update);
+
+        db.execSQL(update);
+    }
+
+
 
     public String searchSelectedModule(String username) {
 
@@ -81,7 +91,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         }return a;
     }
-
 
     public String searchPass (String Email){
         db = this.getReadableDatabase();
@@ -239,6 +248,64 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         }return b;
     }
+
+    public String searchSelectedNameByCode(String Code) {
+
+        db = this.getReadableDatabase();
+
+        String query = "select distinct Name from Modules where Code = " + "\'" + Code +"\'";
+        Log.i("MESSAGE",query);
+        Cursor cursor = db.rawQuery(query,null);
+        String a = "";
+
+        if (cursor.moveToFirst()) {
+
+            do {
+                a = cursor.getString(0);
+            }
+            while (cursor.moveToNext());
+
+        }return a;
+    }
+
+    public String searchSelectedLevelByCode(String Code) {
+
+        db = this.getReadableDatabase();
+
+        String query = "select Level from Modules where Code = " + "\'" + Code +"\'";
+        Log.i("MESSAGE",query);
+        Cursor cursor = db.rawQuery(query,null);
+        String a = "";
+
+        if (cursor.moveToFirst()) {
+
+            do {
+                a = cursor.getString(0);
+            }
+            while (cursor.moveToNext());
+
+        }return a;
+    }
+
+    public String searchSelectedSemesterByCode(String Code) {
+
+        db = this.getReadableDatabase();
+
+        String query = "select Semester from Modules where Code = " + "\'" + Code +"\'";
+        Log.i("MESSAGE",query);
+        Cursor cursor = db.rawQuery(query,null);
+        String a = "";
+
+        if (cursor.moveToFirst()) {
+
+            do {
+                a = cursor.getString(0);
+            }
+            while (cursor.moveToNext());
+
+        }return a;
+    }
+
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
