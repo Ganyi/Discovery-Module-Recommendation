@@ -102,6 +102,8 @@ public class RecommendActivity extends AppCompatActivity implements AdapterView.
                 for (CheckBox box : checkBoxes) {
                     box.setChecked(true);
                 }
+                Toast p = Toast.makeText(RecommendActivity.this, "Click this button to select all", Toast.LENGTH_SHORT);
+                p.show();
             }
         });
 
@@ -127,7 +129,6 @@ public class RecommendActivity extends AppCompatActivity implements AdapterView.
         String a = msg.substring(0, msg.length() - 1);
         return a;
     }
-
     public String FormatInterests(String[] OriIn) {
         String msg = "";
         for (int i = 0; i < OriIn.length; i++) {
@@ -139,42 +140,27 @@ public class RecommendActivity extends AppCompatActivity implements AdapterView.
         return a;
     }
 
-
-
     public void onClickRecommed(View view) {
         if (view.getId() == R.id.searchButton) {
-
 
 
             new AlertDialog.Builder(RecommendActivity.this).setTitle("Tip")//设置对话框标题
 
                     .setMessage("Click a Module to select it！")//设置显示的内容
-
                     .setPositiveButton("OK",new DialogInterface.OnClickListener() {//添加确定按钮
-
                         @Override
-
                         public void onClick(DialogInterface dialog, int which) {//确定按钮的响应事件
-
                         }
                     }
-
                     ).setPositiveButton("OK",new DialogInterface.OnClickListener() {//添加返回按钮
                 @Override
-
                 public void onClick(DialogInterface dialog, int which) {//响应事件
-
                     // TODO Auto-generated method stub
-
                     Log.i("alertdialog"," 请保存数据！");
-
                 }
-
             }).show();//在按键响应事件中显示此对话框
 
-
             listView = (ListView) findViewById(R.id.moduleScroll);
-
 
             interests = new ArrayList<>();
 
@@ -250,9 +236,6 @@ public class RecommendActivity extends AppCompatActivity implements AdapterView.
                 resultSemester= helper.searchModuleSemester(FormatPre(Level), FormatPre(AssessmentType),
                         FormatPre(Credit), FormatPre(Semester), FormatInterests(InterestsString));
 
-
-
-
                 //ArrayAdapter(上下文,当前listview加载的每一个列表项所对应的布局文件,数据源)
                 //适配器加载数据源
                 dataList = new ArrayList<Map<String, Object>>();
@@ -280,18 +263,16 @@ public class RecommendActivity extends AppCompatActivity implements AdapterView.
                         String Md = helper.searchSelectedModule(loginMsg.Username);
                         boolean a = Md.contains(resultCode.get(i));
 
-                        if (a ==true){
+                        if (a == true){
 
-                            Toast p = Toast.makeText(RecommendActivity.this, "You have already selected this Module", Toast.LENGTH_SHORT);
+                            Toast p = Toast.makeText(RecommendActivity.this, "This module is already in your selected list", Toast.LENGTH_SHORT);
                             p.show();
 
                         }
                         else {
 
-                            Toast p = Toast.makeText(RecommendActivity.this, "You have already selected " + resultName.get(i), Toast.LENGTH_SHORT);
+                            Toast p = Toast.makeText(RecommendActivity.this, "Congratulation! " + resultName.get(i) + " is in your selected list now", Toast.LENGTH_SHORT);
                             p.show();
-
-
                             helper.updateSelectedModules(resultCode.get(i), loginMsg.Username);
                         }
                     }
@@ -310,7 +291,6 @@ public class RecommendActivity extends AppCompatActivity implements AdapterView.
             map.put("txtcode", resultCode.get(i));
             map.put("txtlevel", resultLevel.get(i));
             map.put("txtsemester",resultSemester.get(i));
-
             dataList.add(map);
         }
         return dataList;
@@ -334,12 +314,10 @@ public class RecommendActivity extends AppCompatActivity implements AdapterView.
             super(context, data, resource, from, to);
             layout = resource;
         }
-
-
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            ViewHolder mainViewholder = null;
 
+            ViewHolder mainViewholder = null;
             if (convertView == null){
 
                 LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
@@ -348,7 +326,7 @@ public class RecommendActivity extends AppCompatActivity implements AdapterView.
                 viewHolder.Code = (TextView) convertView.findViewById(R.id.Code);
                 viewHolder.Level = (TextView) convertView.findViewById(R.id.Level);
                 viewHolder.Name = (TextView) convertView.findViewById(R.id.Name);
-                //viewHolder.button = (Button) convertView.findViewById(R.id.ListButtonRec);
+
 
                 viewHolder.button.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -357,12 +335,12 @@ public class RecommendActivity extends AppCompatActivity implements AdapterView.
                         p.show();
                     }
                 });
+               // viewHolder.button.setOnLongClickListener();
                 convertView.setTag(viewHolder);
             }
             return convertView;
         }
     }
-
 public class ViewHolder{
 
     TextView Code;
@@ -370,11 +348,9 @@ public class ViewHolder{
     TextView Name;
     Button button;
 
+  }
+
 }
-
-
-
-    }
 
 
 

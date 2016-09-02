@@ -47,7 +47,7 @@ public class LoginActivity extends AppCompatActivity implements RadioGroup.OnChe
             String passwordstr = pass.getText().toString();
 
 
-            String password = helper.searchPass(emailstr);
+            String password = helper.SearchPassword(emailstr);
             String Usertypestr = helper.searchUT(emailstr);
 
             if (passwordstr.equals(password)){

@@ -14,15 +14,16 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 public class SelectedActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
     LoginActivity loginActivity = new LoginActivity();
     DatabaseHelper helper = new DatabaseHelper(this);
-    private ArrayList<String> resultName;
+    private ArrayList<String> moduleCodeArraylist = new ArrayList<>();
 
-    String[] ModulesName;
+    String[] test;
     private SimpleAdapter simpleAdapter;
     private List<Map<String, Object>> dataList;
 
@@ -63,46 +64,37 @@ public class SelectedActivity extends AppCompatActivity implements AdapterView.O
 
         ListView listView = (ListView) findViewById(R.id.SelectedlistView);
 
-        String SelectedModuleStr0 = helper.searchSelectedModule(loginActivity.Username);
+        String selectedModuleStr = helper.searchSelectedModule(loginActivity.Username);
 
-        Log.i("之前的",SelectedModuleStr0);
+        for(int i=0; i < selectedModuleStr.length()/8; i++){
 
-        //Remove the spaces of the String
-        int k = 0;
+            String newString = selectedModuleStr.substring(i*8, (i+1)*8);
 
-        while (SelectedModuleStr0.charAt(k) == ' '){
-            k++;
+            moduleCodeArraylist.add(newString);
         }
 
-        String SelectedModuleStr = SelectedModuleStr0.substring(k);
+        for(Iterator<String> testIterator = moduleCodeArraylist.iterator(); testIterator.hasNext();) {
+            Log.i("elemets", testIterator.next());
+        }
+
+        final String[] ModulesName = new String[moduleCodeArraylist.size()];
+        String[] ModulesLevel = new String[moduleCodeArraylist.size()];
+        String[] ModulesSemester = new String[moduleCodeArraylist.size()];
 
 
-        Log.i("之后的",SelectedModuleStr);
+        for (int i = 0; i < moduleCodeArraylist.size(); i++) {
 
-        final String[] ModulesCode= SelectedModuleStr.split(" ");
-
-        //Log.i("fdsff",ModulesCode[0]);
-        //Log.i("fdsf434f",ModulesCode[1]);
-        String a = helper.searchSelectedNameByCode(ModulesCode[0]);
-        int b = ModulesCode.length;
-
-        Log.i("fdsfddfds", String.valueOf(b));
-
-        Log.i("fdsf4321314f",a);
-
-        final String[] ModulesName = new String[ModulesCode.length];
-
-        String[] ModulesLevel = new String[ModulesCode.length];
-        String[] ModulesSemester = new String[ModulesCode.length];
-
-
-        for (int i = 0;i<ModulesCode.length;i++) {
-
-            ModulesName[i]= helper.searchSelectedNameByCode(ModulesCode[i]);
-            ModulesLevel[i]= helper.searchSelectedLevelByCode(ModulesCode[i]);
-            ModulesSemester[i] = helper.searchSelectedSemesterByCode(ModulesCode[i]);
+            ModulesName[i]= helper.searchSelectedNameByCode(moduleCodeArraylist.get(i));
+            ModulesLevel[i]= helper.searchSelectedLevelByCode(moduleCodeArraylist.get(i));
+            ModulesSemester[i] = helper.searchSelectedSemesterByCode(moduleCodeArraylist.get(i));
 
         }
+        final String[] ModulesCode = new String[moduleCodeArraylist.size()];
+        for (int i = 0; i < moduleCodeArraylist.size(); i++) {
+
+            ModulesCode[i] = moduleCodeArraylist.get(i);
+        }
+
 
         int c = ModulesName.length;
         Log.i("fdsf4321314f", String.valueOf(c));
@@ -110,7 +102,7 @@ public class SelectedActivity extends AppCompatActivity implements AdapterView.O
         dataList = new ArrayList<Map<String, Object>>();
 
 
-        simpleAdapter = new SimpleAdapter(this, getData(ModulesName,ModulesLevel,ModulesCode,ModulesSemester), R.layout.newitem, new String[]{"txt","txtcode","txtlevel","txtsemester"}, new int[]{R.id.Name,R.id.Code,R.id.Level,R.id.Semester});
+        simpleAdapter = new SimpleAdapter(this, getData(ModulesName,ModulesLevel, ModulesCode,ModulesSemester), R.layout.newitem, new String[]{"txt","txtcode","txtlevel","txtsemester"}, new int[]{R.id.Name,R.id.Code,R.id.Level,R.id.Semester});
         listView.setAdapter(simpleAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

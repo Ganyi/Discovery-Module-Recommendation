@@ -20,7 +20,6 @@ public class RegisterActivity extends AppCompatActivity implements RadioGroup.On
         rg = (RadioGroup) findViewById(R.id.radioGroup10);
         rg.setOnCheckedChangeListener(this);
     }
-
     @Override
     public void onCheckedChanged(RadioGroup radioGroup, int i) {
         switch (i){
@@ -32,7 +31,6 @@ public class RegisterActivity extends AppCompatActivity implements RadioGroup.On
                 break;
         }
     }
-
     public void submitClick(View v) {
 
         if (v.getId() == R.id.register_submit) {
@@ -52,7 +50,6 @@ public class RegisterActivity extends AppCompatActivity implements RadioGroup.On
                 pass.show();
 
             } else {
-
 
                 if (!passwordstr.equals(password2str)) {
 

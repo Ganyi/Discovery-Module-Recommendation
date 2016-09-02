@@ -1,7 +1,9 @@
 package com.example.cognac.test;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -19,7 +21,6 @@ public class PreferenceActivity extends AppCompatActivity {
     private ArrayList<CheckBox> AssessmentType;
     private ArrayList<CheckBox> Credits;
     private ArrayList<CheckBox> Semester;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +56,6 @@ public class PreferenceActivity extends AppCompatActivity {
 
 
             preference = new ArrayList<>();
-
             Level = new ArrayList<>();
             AssessmentType = new ArrayList<>();
             Credits = new ArrayList<>();
@@ -110,33 +110,79 @@ public class PreferenceActivity extends AppCompatActivity {
                     preferenceStrings[i] = preference.get(i).getText().toString();
                 }
 
-                String[] LevelStrings = new String[Level.size()];
+                final String[] LevelStrings = new String[Level.size()];
                 for (int i = 0; i < Level.size(); i++) {
                     LevelStrings[i] = Level.get(i).getText().toString();
                 }
 
-                String[] AssessmentTypeStrings = new String[AssessmentType.size()];
+                String Lvor = "";
+                for (int i = 0;i<LevelStrings.length;i++){
+
+                    Lvor = Lvor + LevelStrings[i] + " or ";
+                }
+
+                final String[] AssessmentTypeStrings = new String[AssessmentType.size()];
                 for (int i = 0; i < AssessmentType.size(); i++) {
                     AssessmentTypeStrings[i] = AssessmentType.get(i).getText().toString();
                 }
 
-                String[] CreditsStrings = new String[Credits.size()];
+                for (int i = 0;i<AssessmentTypeStrings.length;i++){
+                    Lvor = Lvor + AssessmentTypeStrings[i] + " or ";
+                }
+
+                final String[] CreditsStrings = new String[Credits.size()];
                 for (int i = 0; i < Credits.size(); i++) {
                     CreditsStrings[i] = Credits.get(i).getText().toString();
                 }
 
-                String[] SemesterStrings = new String[Semester.size()];
+                for (int i = 0;i<CreditsStrings.length;i++){
+                    Lvor = Lvor + CreditsStrings[i] + " or ";
+                }
+
+                final String[] SemesterStrings = new String[Semester.size()];
                 for (int i = 0; i < Semester.size(); i++) {
                     SemesterStrings[i] = Semester.get(i).getText().toString();
                 }
-                Intent intent = new Intent();
-                intent.setClass(PreferenceActivity.this, RecommendActivity.class);
-                intent.putExtra("level", LevelStrings);
-                intent.putExtra("AssessmentType", AssessmentTypeStrings);
-                intent.putExtra("Credits", CreditsStrings);
-                intent.putExtra("Semester", SemesterStrings);
 
-                startActivity(intent);
+                for (int i = 0;i<SemesterStrings.length;i++){
+                    Lvor = Lvor + SemesterStrings[i] + " or ";
+                }
+
+                String a = Lvor.substring(0, Lvor.length() - 4);
+
+                new AlertDialog.Builder(PreferenceActivity.this).setTitle("Attention")
+
+                        .setMessage("You selected " + a + ". Do you want to submit?")
+
+                        .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+
+                            @Override
+
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                // TODO Auto-generated method stub
+                                Intent intent = new Intent();
+                                intent.setClass(PreferenceActivity.this, RecommendActivity.class);
+                                intent.putExtra("level", LevelStrings);
+                                intent.putExtra("AssessmentType", AssessmentTypeStrings);
+                                intent.putExtra("Credits", CreditsStrings);
+                                intent.putExtra("Semester", SemesterStrings);
+
+                                startActivity(intent);
+
+                                finish();
+
+                            }
+
+                        }).setNegativeButton("No",new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+
+                }).show();
+
             }
         }
     }

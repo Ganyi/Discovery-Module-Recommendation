@@ -12,7 +12,7 @@ import java.util.ArrayList;
 /**
  * Created by Cognac on 16/7/6.
  */
-public class DatabaseHelper extends SQLiteOpenHelper {
+    public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "Project.db";
@@ -24,7 +24,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     SQLiteDatabase db;
 
     private static final String TABLE_CREATE = "create table Users (id integer primary key " +
-            "not null , Password  text not null , Email text not null, Usertype text not null , SelectedModules );";
+            "not null , Password  text not null , Email text not null, " +
+            "Usertype text not null , SelectedModules );";
 
 
     public DatabaseHelper(Context context){
@@ -44,20 +45,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_PASSWORD,c.getPassword());
         values.put(COLUMN_USERTYPE,c.getUsertype());
         values.put(COLUMN_SELECTEDMODULES,"");
-
         db.insert(TABLE_NAME, null, values);
         db.close();
     }
 
     public void updateSelectedModules(String ModuleCode, String Username){
         db = this.getWritableDatabase();
-
         String ori = searchSelectedModule(Username);
-
-        String update = "UPDATE Users SET SelectedModules = " + "\'" + ori + " " +  ModuleCode + "\'" + " WHERE Email = '" + Username + "\'";
+        String update = "UPDATE Users SET SelectedModules = " + "\'" + ori +
+                ModuleCode + "\'" + " WHERE Email = '" + Username + "\'";
 
         Log.i("Update",update);
-
         db.execSQL(update);
     }
 
@@ -66,12 +64,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         String update = "UPDATE Users SET SelectedModules = replace (SelectedModules, '"+ ModuleCode + "\', \"\")";
 
-        Log.i("Update",update);
+        Log.i("delete",update);
 
         db.execSQL(update);
     }
-
-
 
     public String searchSelectedModule(String username) {
 
@@ -92,7 +88,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }return a;
     }
 
-    public String searchPass (String Email){
+    public String SearchPassword(String Email){
         db = this.getReadableDatabase();
         String query = "select Email,Password from " + TABLE_NAME;
         Cursor cursor = db.rawQuery(query,null);
@@ -153,7 +149,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public ArrayList<String> searchModuleName(String Level, String AssessmentType, String Credit,
                                               String Semester, String Interests) {
-
         db = this.getReadableDatabase();
 
         String query = "select distinct Name from Modules where" + " \"Level\""
@@ -174,7 +169,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
             }return b;
         }
-
 
     public ArrayList<String> searchModuleID(String Level, String AssessmentType, String Credit,
                                               String Semester, String Interests) {
@@ -199,8 +193,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         }return b;
     }
-
-
     public ArrayList<String> searchModuleLevel(String Level, String AssessmentType, String Credit,
                                             String Semester, String Interests) {
 
@@ -305,8 +297,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         }return a;
     }
-
-
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
         String query = "DROP TABLE IF EXISTS " + TABLE_NAME;
