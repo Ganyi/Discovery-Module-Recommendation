@@ -36,6 +36,10 @@ public class StuMainActivity extends AppCompatActivity {
             Intent i = new Intent(StuMainActivity.this, SelectedActivity.class);
             startActivity(i);
         }
+        if(view.getId() == R.id.help){
+            Intent i = new Intent(StuMainActivity.this, HelpActivity.class);
+            startActivity(i);
+        }
 
     }
 }
